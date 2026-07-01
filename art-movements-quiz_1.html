@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Field Guide to Art Movements — 100-Question Quiz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* palette named for real painters' pigments */
+    --lead-white:#FBFAF6;
+    --parchment:#FFFEFB;
+    --ivory-black:#17140F;
+    --ultramarine:#2A3D8F;
+    --vermilion:#C4402A;
+    --viridian:#2F6B54;
+    --ochre:#B98A2E;
+    --stone:#E7E2D6;
+    --stone-2:#D6CFC0;
+    --muted:#6B6455;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--lead-white);
+    color:var(--ivory-black);
+    font-family:'IBM Plex Sans',system-ui,sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- sticky control bar ---------- */
+  .bar{
+    position:sticky;top:0;z-index:50;
+    background:rgba(251,250,246,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--stone-2);
+  }
+  .bar-inner{
+    max-width:860px;margin:0 auto;padding:.7rem 1.25rem;
+    display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
+  }
+  .bar-title{
+    font-family:'Fraunces',serif;font-weight:600;font-size:1rem;
+    letter-spacing:.01em;margin-right:auto;
+  }
+  .bar-title span{color:var(--ochre);}
+  .score{
+    font-family:'Fraunces',serif;font-weight:600;font-size:1.05rem;
+    font-variant-numeric:tabular-nums;white-space:nowrap;
+  }
+  .score small{font-family:'IBM Plex Sans';font-weight:500;font-size:.7rem;
+    text-transform:uppercase;letter-spacing:.14em;color:var(--muted);display:block;line-height:1;}
+  .btn{
+    font-family:'IBM Plex Sans';font-size:.72rem;font-weight:600;
+    text-transform:uppercase;letter-spacing:.1em;
+    border:1px solid var(--ivory-black);background:transparent;color:var(--ivory-black);
+    padding:.5rem .8rem;border-radius:999px;cursor:pointer;transition:.18s;
+  }
+  .btn:hover{background:var(--ivory-black);color:var(--lead-white);}
+  .btn.active{background:var(--ultramarine);border-color:var(--ultramarine);color:#fff;}
+  .btn:focus-visible{outline:3px solid var(--ochre);outline-offset:2px;}
+
+  /* ---------- timeline progress ---------- */
+  .timeline{max-width:860px;margin:0 auto;padding:0 1.25rem .55rem;}
+  .track{position:relative;height:3px;background:var(--stone-2);border-radius:2px;}
+  .fill{position:absolute;left:0;top:0;height:100%;width:0;background:var(--ultramarine);border-radius:2px;transition:width .4s ease;}
+  .ticks{display:flex;justify-content:space-between;margin-top:.3rem;
+    font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500;}
+
+  /* ---------- hero ---------- */
+  header.hero{max-width:860px;margin:0 auto;padding:3.2rem 1.25rem 1.5rem;}
+  .eyebrow{font-size:.7rem;text-transform:uppercase;letter-spacing:.28em;color:var(--ochre);font-weight:600;margin-bottom:1rem;}
+  h1{
+    font-family:'Fraunces',serif;font-weight:600;font-optical-sizing:auto;
+    font-size:clamp(2.4rem,7vw,4.4rem);line-height:.98;margin:0 0 1rem;
+    letter-spacing:-.02em;
+  }
+  h1 em{font-style:italic;color:var(--ultramarine);}
+  .lede{font-size:1.05rem;max-width:52ch;color:var(--muted);margin:0 0 1.8rem;}
+  .lede strong{color:var(--ivory-black);font-weight:600;}
+  .swatches{display:flex;gap:0;border:1px solid var(--stone-2);border-radius:6px;overflow:hidden;max-width:520px;}
+  .swatch{flex:1;padding:.55rem .4rem .5rem;text-align:center;font-size:.56rem;
+    text-transform:uppercase;letter-spacing:.08em;color:#fff;font-weight:600;}
+  .swatch.dark-txt{color:var(--ivory-black);}
+
+  /* ---------- cards ---------- */
+  main{max-width:860px;margin:0 auto;padding:1.5rem 1.25rem 4rem;}
+  .card{
+    background:var(--parchment);
+    border:1px solid var(--stone-2);
+    border-radius:4px;
+    padding:1.5rem 1.6rem 1.4rem;
+    margin-bottom:1.15rem;
+    position:relative;
+  }
+  .card-head{display:flex;align-items:baseline;gap:.9rem;margin-bottom:.55rem;}
+  .cat-no{
+    font-family:'Fraunces',serif;font-weight:600;font-size:.95rem;color:var(--ochre);
+    font-variant-numeric:tabular-nums;white-space:nowrap;
+  }
+  .era{font-size:.62rem;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);font-weight:600;}
+  .q{font-family:'Fraunces',serif;font-size:1.22rem;font-weight:500;line-height:1.35;margin:0 0 1rem;letter-spacing:-.005em;}
+  .plate{margin:0 0 1.05rem;border:1px solid var(--stone-2);border-radius:3px;overflow:hidden;background:var(--stone);text-align:center;}
+  .plate img{display:block;margin:0 auto;max-width:100%;max-height:380px;width:auto;object-fit:contain;}
+  .plate figcaption{font-size:.66rem;letter-spacing:.06em;color:var(--muted);padding:.4rem .6rem;background:var(--parchment);border-top:1px solid var(--stone-2);font-style:italic;}
+  .plate.broken{display:none;}
+
+  .opts{display:grid;gap:.5rem;}
+  .opt{
+    display:flex;align-items:flex-start;gap:.7rem;text-align:left;width:100%;
+    font-family:'IBM Plex Sans';font-size:.95rem;color:var(--ivory-black);
+    background:var(--lead-white);border:1px solid var(--stone-2);border-radius:3px;
+    padding:.72rem .85rem;cursor:pointer;transition:.14s;
+  }
+  .opt:hover:not([disabled]){border-color:var(--ivory-black);background:#fff;}
+  .opt:focus-visible{outline:3px solid var(--ochre);outline-offset:1px;}
+  .opt .mark{
+    flex:0 0 auto;width:1.35rem;height:1.35rem;border:1px solid var(--stone-2);border-radius:50%;
+    display:grid;place-items:center;font-size:.7rem;font-weight:600;color:var(--muted);
+    font-family:'Fraunces',serif;transition:.14s;
+  }
+  .opt.correct{border-color:var(--viridian);background:#EEF5F1;color:var(--viridian);font-weight:600;}
+  .opt.correct .mark{border-color:var(--viridian);background:var(--viridian);color:#fff;}
+  .opt.wrong{border-color:var(--vermilion);background:#FaeeeC;color:var(--vermilion);}
+  .opt.wrong .mark{border-color:var(--vermilion);background:var(--vermilion);color:#fff;}
+  .opt[disabled]{cursor:default;}
+  .opt.dim{opacity:.5;}
+
+  .note{
+    margin-top:.9rem;padding:.7rem .9rem;border-left:3px solid var(--ochre);
+    background:var(--lead-white);font-size:.85rem;color:var(--muted);border-radius:0 3px 3px 0;
+    display:none;
+  }
+  .note.show{display:block;}
+  .note b{color:var(--ivory-black);font-weight:600;}
+
+  /* study mode reveal for unanswered */
+  body.study .card:not(.answered) .opt.reveal{border-color:var(--viridian);background:#EEF5F1;color:var(--viridian);font-weight:600;}
+  body.study .card:not(.answered) .opt.reveal .mark{border-color:var(--viridian);background:var(--viridian);color:#fff;}
+  body.study .card:not(.answered) .note{display:block;}
+
+  footer{max-width:860px;margin:0 auto;padding:2rem 1.25rem 3.5rem;border-top:1px solid var(--stone-2);
+    font-size:.8rem;color:var(--muted);}
+  footer b{font-family:'Fraunces',serif;color:var(--ivory-black);}
+
+  /* finish banner */
+  #finish{display:none;background:var(--ultramarine);color:#fff;border:none;text-align:center;padding:2rem;}
+  #finish.show{display:block;}
+  #finish .big{font-family:'Fraunces',serif;font-size:2rem;font-weight:600;}
+  #finish .sub{opacity:.85;font-size:.95rem;margin-top:.3rem;}
+
+  @media (max-width:560px){
+    .card{padding:1.2rem 1.1rem;}
+    .q{font-size:1.08rem;}
+    .swatch{font-size:.5rem;}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;}html{scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-inner">
+    <div class="bar-title">vania. <span>·</span> Field Guide</div>
+    <div class="score"><span id="scoreNum">0 / 100</span><small>Correct</small></div>
+    <button class="btn" id="studyBtn" aria-pressed="false">Study mode</button>
+    <button class="btn" id="resetBtn">Reset</button>
+  </div>
+  <div class="timeline">
+    <div class="track"><div class="fill" id="fill"></div></div>
+    <div class="ticks"><span>14th</span><span>16th</span><span>18th</span><span>19th</span><span>20th</span><span>Now</span></div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="eyebrow">A Studio Quiz · 100 Questions</div>
+  <h1>A Field Guide to<br><em>Art Movements</em></h1>
+  <p class="lede">Seven centuries of painting, from the Italian <strong>Renaissance</strong> to <strong>Conceptual Art</strong>. Tap an answer and it grades itself — the correct choice turns green, and a short note explains why. Prefer to study? Flip on <strong>Study mode</strong> to reveal every answer.</p>
+  <div class="swatches">
+    <div class="swatch" style="background:#FBFAF6" data-dark>Lead White</div>
+    <div class="swatch" style="background:#17140F">Ivory Black</div>
+    <div class="swatch" style="background:#2A3D8F">Ultramarine</div>
+    <div class="swatch" style="background:#2F6B54">Viridian</div>
+    <div class="swatch" style="background:#C4402A">Vermilion</div>
+    <div class="swatch" style="background:#B98A2E">Yellow Ochre</div>
+  </div>
+</header>
+
+<main id="quiz"></main>
+
+<div id="finish">
+  <div class="big" id="finishScore"></div>
+  <div class="sub" id="finishMsg"></div>
+</div>
+
+<footer>
+  <b>vania. visual art studios</b> — a study aid for the 8-week foundations track.
+  Painting images are public-domain works courtesy of Wikimedia Commons; a few may not load, in which case the question still works from the text alone.
+  100 questions · answers included · single-file HTML.
+</footer>
+
+<script>
+/* answer field holds the exact correct option string, so options can be shuffled safely */
+const IMG = f => "https://commons.wikimedia.org/wiki/Special:FilePath/" + encodeURIComponent(f) + "?width=640";
+
+const DATA = [
+/* ---------------- RENAISSANCE ---------------- */
+{era:"Renaissance · 14th–16th c.", q:"The word “Renaissance” literally means what?", options:["Rebirth","Enlightenment","Reformation","Awakening"], answer:"Rebirth", note:"French for <b>rebirth</b> — a revival of classical Greek and Roman ideals in art and learning."},
+{era:"Renaissance · 16th c.", q:"Who painted the ceiling of the Sistine Chapel?", options:["Michelangelo","Leonardo da Vinci","Raphael","Botticelli"], answer:"Michelangelo", note:"<b>Michelangelo</b> painted it between 1508–1512, including the famous Creation of Adam.", img:IMG("Michelangelo - Creation of Adam (cropped).jpg"), cap:"Michelangelo, The Creation of Adam (Sistine Chapel), c. 1512"},
+{era:"Renaissance · 15th c.", q:"“The Birth of Venus” — which movement does this Botticelli work belong to?", options:["Renaissance","Baroque","Rococo","Romanticism"], answer:"Renaissance", note:"A defining <b>Renaissance</b> work by Sandro Botticelli, c. 1485.", img:IMG("Sandro Botticelli - La nascita di Venere - Google Art Project - edited.jpg"), cap:"Botticelli, The Birth of Venus, c. 1485"},
+{era:"Renaissance · 16th c.", q:"“Sfumato,” the soft, smoky blurring of edges, was mastered by whom?", options:["Leonardo da Vinci","Titian","Albrecht Dürer","Caravaggio"], answer:"Leonardo da Vinci", note:"<b>Leonardo</b> used sfumato in the Mona Lisa to blend tones without hard lines.", img:IMG("Mona Lisa, by Leonardo da Vinci, from C2RMF retouched.jpg"), cap:"Leonardo da Vinci, Mona Lisa, c. 1503–1519"},
+{era:"Renaissance", q:"Linear perspective, creating the illusion of depth on a flat surface, was formalized during which period?", options:["Renaissance","Impressionism","Baroque","Gothic"], answer:"Renaissance", note:"Brunelleschi and Alberti codified one-point <b>perspective</b> in early-15th-century Florence."},
+{era:"Renaissance · 16th c.", q:"“The School of Athens” fresco was painted by?", options:["Raphael","Michelangelo","Sandro Botticelli","Donatello"], answer:"Raphael", note:"<b>Raphael</b> painted it in the Vatican, c. 1509–1511.", img:IMG("Raphael School of Athens.jpg"), cap:"Raphael, The School of Athens, 1509–1511"},
+{era:"Northern Renaissance · 15th c.", q:"Which artist painted the “Arnolfini Portrait”?", options:["Jan van Eyck","Hieronymus Bosch","Pieter Bruegel","Hans Holbein"], answer:"Jan van Eyck", note:"<b>Jan van Eyck</b>, 1434 — an early triumph of oil painting in the North.", img:IMG("Van Eyck - Arnolfini Portrait.jpg"), cap:"Jan van Eyck, The Arnolfini Portrait, 1434"},
+{era:"Renaissance", q:"The High Renaissance was centered mainly in which country?", options:["Italy","France","Netherlands","Spain"], answer:"Italy", note:"Especially <b>Florence, Rome and Venice</b> around 1490–1527."},
+{era:"Northern Renaissance", q:"Which German artist is famous for the engraving “Melencolia I” and highly detailed woodcuts?", options:["Albrecht Dürer","Matthias Grünewald","Lucas Cranach","Hans Memling"], answer:"Albrecht Dürer", note:"<b>Dürer</b> brought Italian Renaissance ideas north and elevated printmaking to fine art.", img:IMG("Albrecht Dürer - Melencolia I - Google Art Project.jpg"), cap:"Albrecht Dürer, Melencolia I, 1514"},
+
+/* ---------------- BAROQUE ---------------- */
+{era:"Baroque · 17th c.", q:"Baroque art is best known for what quality?", options:["Dramatic light and movement","Flat pastel calm","Geometric abstraction","Muted minimalism"], answer:"Dramatic light and movement", note:"<b>Drama, motion and theatrical lighting</b> defined the Baroque."},
+{era:"Baroque", q:"The technique of strong contrast between light and dark is called?", options:["Chiaroscuro","Impasto","Grisaille","Sgraffito"], answer:"Chiaroscuro", note:"<b>Chiaroscuro</b> (Italian for “light-dark”); its extreme form is tenebrism."},
+{era:"Baroque · 17th c.", q:"“The Calling of Saint Matthew,” lit by a shaft of divine light, is by?", options:["Caravaggio","Peter Paul Rubens","Nicolas Poussin","El Greco"], answer:"Caravaggio", note:"<b>Caravaggio</b> pioneered dramatic tenebrism in early Baroque Rome.", img:IMG("The Calling of Saint Matthew-Caravaggio (1599-1600).jpg"), cap:"Caravaggio, The Calling of Saint Matthew, 1599–1600"},
+{era:"Dutch Baroque · 17th c.", q:"“Girl with a Pearl Earring” is a masterpiece of which movement?", options:["Baroque","Rococo","Realism","Renaissance"], answer:"Baroque", note:"Painted by <b>Johannes Vermeer</b> of the Dutch Golden Age, c. 1665.", img:IMG("1665 Girl with a Pearl Earring.jpg"), cap:"Vermeer, Girl with a Pearl Earring, c. 1665"},
+{era:"Dutch Baroque · 17th c.", q:"“The Night Watch” was painted by?", options:["Rembrandt","Johannes Vermeer","Frans Hals","Peter Paul Rubens"], answer:"Rembrandt", note:"<b>Rembrandt van Rijn</b>, 1642 — a landmark group portrait full of movement.", img:IMG("The Night Watch - HD.jpg"), cap:"Rembrandt, The Night Watch, 1642"},
+{era:"Baroque", q:"The Baroque flourished partly because of the Catholic Church’s response known as the?", options:["Counter-Reformation","Crusades","Inquisition trials","Great Schism"], answer:"Counter-Reformation", note:"The Church used emotional, awe-inspiring art to reaffirm faith during the <b>Counter-Reformation</b>."},
+{era:"Flemish Baroque · 17th c.", q:"Which Flemish master painted robust, dynamic works like “The Descent from the Cross”?", options:["Peter Paul Rubens","Anthony van Dyck","Jacob Jordaens","Frans Snyders"], answer:"Peter Paul Rubens", note:"<b>Rubens</b> — the great engine of Flemish Baroque energy and color."},
+{era:"Spanish Baroque · 17th c.", q:"“Las Meninas,” a complex court portrait, was painted by?", options:["Diego Velázquez","Bartolomé Murillo","Francisco de Zurbarán","Jusepe de Ribera"], answer:"Diego Velázquez", note:"<b>Velázquez</b>, 1656 — famous for its play of viewer, mirror and painter.", img:IMG("Las Meninas, by Diego Velázquez, from Prado in Google Earth.jpg"), cap:"Diego Velázquez, Las Meninas, 1656"},
+{era:"Baroque · 17th c.", q:"Artemisia Gentileschi, painter of “Judith Slaying Holofernes,” worked in which style?", options:["Baroque","Mannerism","Rococo","Neoclassicism"], answer:"Baroque", note:"A powerful <b>Baroque</b> follower of Caravaggio’s dramatic realism."},
+
+/* ---------------- ROCOCO ---------------- */
+{era:"Rococo · 18th c.", q:"Rococo is characterized by?", options:["Light, playful pastel elegance","Somber religious drama","Industrial machine themes","Cubist fragmentation"], answer:"Light, playful pastel elegance", note:"Ornate curves, soft pastels and flirtatious, aristocratic charm."},
+{era:"Rococo · 18th c.", q:"“The Swing” (L’Escarpolette) was painted by?", options:["Jean-Honoré Fragonard","François Boucher","Antoine Watteau","Jean-Baptiste Chardin"], answer:"Jean-Honoré Fragonard", note:"<b>Fragonard</b>, c. 1767 — the picture-perfect emblem of Rococo playfulness.", img:IMG("Fragonard, The Swing.jpg"), cap:"Fragonard, The Swing, c. 1767"},
+{era:"Rococo · 18th c.", q:"Rococo originated in which country in the early 18th century?", options:["France","Italy","England","Austria"], answer:"France", note:"It began in <b>Paris</b> as a lighter reaction to heavy Baroque grandeur."},
+{era:"Rococo · 18th c.", q:"Antoine Watteau invented which dreamy genre of elegant outdoor gatherings?", options:["Fête galante","Veduta","Capriccio","History painting"], answer:"Fête galante", note:"The <b>fête galante</b> depicts refined figures at leisure in idyllic parkland."},
+{era:"Rococo · 18th c.", q:"Which Rococo painter created light, sensual works like “The Toilette of Venus”?", options:["François Boucher","Jacques-Louis David","J.A.D. Ingres","Nicolas Poussin"], answer:"François Boucher", note:"<b>Boucher</b> was a favorite of Madame de Pompadour and the French court."},
+
+/* ---------------- NEOCLASSICISM ---------------- */
+{era:"Neoclassicism · late 18th c.", q:"Neoclassicism revived the art of which civilizations?", options:["Ancient Greece and Rome","Medieval Europe","Feudal Japan","Ancient Egypt"], answer:"Ancient Greece and Rome", note:"A return to <b>classical</b> order, restraint and civic virtue."},
+{era:"Neoclassicism · late 18th c.", q:"“The Death of Marat” and “Oath of the Horatii” were painted by?", options:["Jacques-Louis David","Eugène Delacroix","Théodore Géricault","J.A.D. Ingres"], answer:"Jacques-Louis David", note:"<b>David</b> was the leading painter of the French Revolution and Napoleonic era.", img:IMG("Death of Marat by David.jpg"), cap:"Jacques-Louis David, The Death of Marat, 1793"},
+{era:"Neoclassicism", q:"Neoclassicism arose largely as a reaction against the frivolity of which style?", options:["Rococo","Baroque","Realism","Gothic"], answer:"Rococo", note:"It rejected <b>Rococo</b> excess in favor of moral seriousness and clarity."},
+{era:"Neoclassicism", q:"The excavation of which buried Roman cities helped inspire Neoclassicism?", options:["Pompeii and Herculaneum","Troy and Carthage","Athens and Sparta","Ostia and Capri"], answer:"Pompeii and Herculaneum", note:"Rediscovered in the 1700s, <b>Pompeii and Herculaneum</b> reignited interest in antiquity."},
+
+/* ---------------- ROMANTICISM ---------------- */
+{era:"Romanticism · early 19th c.", q:"Romanticism prized above all which value?", options:["Emotion and the sublime","Reason and order","Mechanical precision","Commercial imagery"], answer:"Emotion and the sublime", note:"Feeling, nature, imagination and awe over Enlightenment logic."},
+{era:"Romanticism · 19th c.", q:"“Liberty Leading the People” belongs to which movement?", options:["Romanticism","Neoclassicism","Realism","Baroque"], answer:"Romanticism", note:"<b>Eugène Delacroix</b>, 1830 — passion and revolution over cool classicism.", img:IMG("Eugène Delacroix - Le 28 Juillet. La Liberté guidant le peuple.jpg"), cap:"Delacroix, Liberty Leading the People, 1830"},
+{era:"Romanticism · 19th c.", q:"“Wanderer above the Sea of Fog” was painted by?", options:["Caspar David Friedrich","J.M.W. Turner","John Constable","Francisco Goya"], answer:"Caspar David Friedrich", note:"<b>Friedrich</b>, c. 1818 — the ultimate image of the Romantic sublime.", img:IMG("Caspar David Friedrich - Wanderer above the sea of fog.jpg"), cap:"Caspar David Friedrich, Wanderer above the Sea of Fog, c. 1818"},
+{era:"Romanticism · 19th c.", q:"Which English painter made luminous, atmospheric works like “The Fighting Temeraire”?", options:["J.M.W. Turner","John Constable","Thomas Gainsborough","Joshua Reynolds"], answer:"J.M.W. Turner", note:"<b>Turner</b>’s dissolving light and color anticipated Impressionism.", img:IMG("The Fighting Temeraire, JMW Turner, National Gallery.jpg"), cap:"J.M.W. Turner, The Fighting Temeraire, 1838"},
+{era:"Romanticism · 19th c.", q:"Théodore Géricault’s harrowing “The Raft of the Medusa” is a landmark of?", options:["Romanticism","Neoclassicism","Realism","Rococo"], answer:"Romanticism", note:"<b>Géricault</b>, 1819 — raw emotion drawn from a real shipwreck scandal.", img:IMG("The Raft of the Medusa - Louvre.jpg"), cap:"Théodore Géricault, The Raft of the Medusa, 1818–19"},
+{era:"Romanticism · early 19th c.", q:"Goya’s “The Third of May 1808” and his “Black Paintings” align most with?", options:["Romanticism","Baroque","Impressionism","Symbolism"], answer:"Romanticism", note:"<b>Francisco Goya</b> bridged old-master craft and modern, emotional darkness.", img:IMG("El Tres de Mayo, by Francisco de Goya, from Prado thin black margin.jpg"), cap:"Francisco Goya, The Third of May 1808, 1814"},
+
+/* ---------------- REALISM ---------------- */
+{era:"Realism · mid-19th c.", q:"Realism aimed to depict what?", options:["Ordinary life without idealization","Mythological gods","Dream visions","Pure geometry"], answer:"Ordinary life without idealization", note:"Peasants, laborers and everyday scenes, shown plainly and honestly."},
+{era:"Realism · 19th c.", q:"Gustave Courbet, painter of “The Stone Breakers,” founded which movement?", options:["Realism","Impressionism","Symbolism","Fauvism"], answer:"Realism", note:"<b>Courbet</b> insisted on painting only what he could see."},
+{era:"Realism · 19th c.", q:"“The Gleaners,” showing peasant women gathering leftover grain, is by?", options:["Jean-François Millet","Honoré Daumier","Camille Corot","Édouard Manet"], answer:"Jean-François Millet", note:"<b>Millet</b>, 1857 — dignified labor as a serious subject.", img:IMG("Jean-François Millet - Gleaners - Google Art Project.jpg"), cap:"Jean-François Millet, The Gleaners, 1857"},
+{era:"Realism", q:"Realism emerged mainly in which country around the 1850s?", options:["France","Russia","England","Germany"], answer:"France", note:"Centered in <b>France</b>, partly in response to the 1848 revolutions."},
+{era:"Realism · 19th c.", q:"Honoré Daumier is known for satirical prints and paintings within which movement?", options:["Realism","Rococo","Surrealism","Pop Art"], answer:"Realism", note:"<b>Daumier</b> skewered politics and daily hardship with sharp realism."},
+
+/* ---------------- IMPRESSIONISM ---------------- */
+{era:"Impressionism · 1870s", q:"Impressionism took its name from a painting titled “Impression, Sunrise” by?", options:["Claude Monet","Pierre-Auguste Renoir","Edgar Degas","Camille Pissarro"], answer:"Claude Monet", note:"<b>Monet</b>, 1872 — a critic mocked it as a mere “impression,” and the name stuck.", img:IMG("Claude Monet, Impression, soleil levant.jpg"), cap:"Monet, Impression, Sunrise, 1872"},
+{era:"Impressionism", q:"Painting outdoors to capture natural light is called?", options:["En plein air","Alla prima","Al fresco","Trompe l’oeil"], answer:"En plein air", note:"Portable paint tubes made <b>en plein air</b> painting practical."},
+{era:"Impressionism", q:"The famous “Water Lilies” series was painted by?", options:["Claude Monet","Édouard Manet","Alfred Sisley","Gustave Caillebotte"], answer:"Claude Monet", note:"<b>Monet</b> painted his Giverny pond roughly 250 times.", img:IMG("Claude Monet - Water Lilies - 1906, Ryerson.jpg"), cap:"Claude Monet, Water Lilies, 1906"},
+{era:"Impressionism · 19th c.", q:"Edgar Degas is especially famous for depicting?", options:["Ballet dancers","Battle scenes","Still-life fruit","Stormy seascapes"], answer:"Ballet dancers", note:"<b>Degas</b> studied dancers, races and modern Parisian life."},
+{era:"Impressionism · 19th c.", q:"Which American Impressionist is known for tender mother-and-child scenes?", options:["Mary Cassatt","Georgia O’Keeffe","Grandma Moses","Cecilia Beaux"], answer:"Mary Cassatt", note:"<b>Mary Cassatt</b>, an American in Paris, exhibited with the Impressionists."},
+{era:"Impressionism · 19th c.", q:"Pierre-Auguste Renoir’s warm, sunlit social scenes belong to?", options:["Impressionism","Realism","Symbolism","Cubism"], answer:"Impressionism", note:"<b>Renoir</b> loved luminous skin tones and joyful gatherings."},
+
+/* ---------------- POST-IMPRESSIONISM ---------------- */
+{era:"Post-Impressionism · 1889", q:"“The Starry Night” was painted by?", options:["Vincent van Gogh","Paul Gauguin","Paul Cézanne","Georges Seurat"], answer:"Vincent van Gogh", note:"<b>Van Gogh</b>, 1889 — swirling, emotional brushwork.", img:IMG("Van Gogh - Starry Night - Google Art Project.jpg"), cap:"Van Gogh, The Starry Night, 1889"},
+{era:"Post-Impressionism · 1880s", q:"“A Sunday on La Grande Jatte,” built from countless tiny dots, is by?", options:["Georges Seurat","Claude Monet","Paul Signac","Henri Matisse"], answer:"Georges Seurat", note:"<b>Seurat</b> pioneered Pointillism — dots of pure color that blend in the eye.", img:IMG("A Sunday on La Grande Jatte, Georges Seurat, 1884.jpg"), cap:"Seurat, A Sunday on La Grande Jatte, 1884–86"},
+{era:"Post-Impressionism · 19th c.", q:"Paul Cézanne’s structural, faceted approach paved the way for?", options:["Cubism","Surrealism","Dada","Rococo"], answer:"Cubism", note:"<b>Cézanne</b> sought the underlying geometry of nature — a seed of Cubism."},
+{era:"Post-Impressionism · 19th c.", q:"Paul Gauguin is famous for bold, flat scenes painted in?", options:["Tahiti","Norway","Morocco","Japan"], answer:"Tahiti", note:"<b>Gauguin</b> sought a “primitive” paradise in the South Pacific."},
+{era:"Post-Impressionism", q:"Van Gogh’s thick, sculptural application of paint is called?", options:["Impasto","Glazing","Scumbling","Gesso"], answer:"Impasto", note:"<b>Impasto</b> — paint laid on so thickly the strokes cast shadows."},
+
+/* ---------------- SYMBOLISM ---------------- */
+{era:"Symbolism · late 19th c.", q:"Symbolism favored what kind of imagery?", options:["Dreamlike, mystical, mythological","Documentary realism","Machine aesthetics","Pop advertising"], answer:"Dreamlike, mystical, mythological", note:"A reaction against Realism, using symbols to suggest ideas and emotions."},
+{era:"Symbolism / proto-Expressionism · 1893", q:"Munch’s “The Scream” is a key precursor to which movement?", options:["Expressionism","Cubism","Minimalism","Neoclassicism"], answer:"Expressionism", note:"<b>Edvard Munch</b> externalized inner anguish — the essence of Expressionism.", img:IMG("Edvard Munch, 1893, The Scream, oil, tempera and pastel on cardboard, 91 x 73 cm, National Gallery of Norway.jpg"), cap:"Munch, The Scream, 1893"},
+{era:"Symbolism / Art Nouveau · 1908", q:"Gustav Klimt’s gold-leaf “The Kiss” blends Symbolism with?", options:["Art Nouveau","Baroque","Futurism","Realism"], answer:"Art Nouveau", note:"<b>Klimt</b> led the Vienna Secession, closely tied to Art Nouveau.", img:IMG("The Kiss - Gustav Klimt - Google Cultural Institute.jpg"), cap:"Gustav Klimt, The Kiss, 1907–08"},
+
+/* ---------------- ART NOUVEAU ---------------- */
+{era:"Art Nouveau · c. 1890–1910", q:"Art Nouveau is defined by?", options:["Flowing organic lines from nature","Rigid geometric grids","Muted photo-realism","Random drip painting"], answer:"Flowing organic lines from nature", note:"Whiplash curves inspired by vines, flowers and flowing hair."},
+{era:"Art Nouveau · 1890s", q:"Alphonse Mucha is celebrated above all for his decorative?", options:["Posters","Frescoes","Bronze sculptures","Mosaic floors"], answer:"Posters", note:"<b>Mucha</b>’s theatrical advertising posters became the face of the style.", img:IMG("Alphonse Mucha - Advertisment for Job cigarettes, 1896.jpg"), cap:"Alphonse Mucha, Job poster, 1896"},
+{era:"Art Nouveau architecture", q:"The architect of Barcelona’s Sagrada Família, in an Art Nouveau spirit, was?", options:["Antoni Gaudí","Le Corbusier","Frank Lloyd Wright","Mies van der Rohe"], answer:"Antoni Gaudí", note:"<b>Gaudí</b>’s organic, undulating forms are Art Nouveau at architectural scale."},
+{era:"Art Nouveau", q:"In Germany, Art Nouveau was known as?", options:["Jugendstil","Bauhaus","Werkbund","Biedermeier"], answer:"Jugendstil", note:"<b>Jugendstil</b> means “youth style,” after the magazine Jugend."},
+
+/* ---------------- FAUVISM ---------------- */
+{era:"Fauvism · c. 1905", q:"“Fauvism” comes from a French phrase meaning?", options:["Wild beasts","Bright suns","New men","Free spirits"], answer:"Wild beasts", note:"A critic called the artists <b>les fauves</b> — “the wild beasts.”"},
+{era:"Fauvism · early 20th c.", q:"The leader of Fauvism was?", options:["Henri Matisse","Pablo Picasso","Georges Braque","Wassily Kandinsky"], answer:"Henri Matisse", note:"<b>Matisse</b> led the short-lived but explosive Fauvist group."},
+{era:"Fauvism", q:"Fauvism is best known for its use of?", options:["Bold, non-naturalistic color","Monochrome grayscale","Photographic detail","Tiny pointillist dots"], answer:"Bold, non-naturalistic color", note:"Color chosen for emotional force, not accuracy — green skies, red trees."},
+
+/* ---------------- EXPRESSIONISM ---------------- */
+{era:"Expressionism · early 20th c.", q:"Expressionism sought to convey?", options:["Inner emotion, often through distortion","Objective reality","Classical harmony","Consumer imagery"], answer:"Inner emotion, often through distortion", note:"Feeling over accuracy — the world as it is <i>felt</i>."},
+{era:"Expressionism · 1911", q:"The Expressionist group “Der Blaue Reiter” (The Blue Rider) included?", options:["Wassily Kandinsky","Salvador Dalí","Andy Warhol","Claude Monet"], answer:"Wassily Kandinsky", note:"<b>Kandinsky</b> pushed toward pure abstraction and spirituality in color."},
+{era:"Expressionism · 1905", q:"The German Expressionist group founded in Dresden in 1905 was?", options:["Die Brücke","De Stijl","The Nabis","The Ashcan School"], answer:"Die Brücke", note:"<b>Die Brücke</b> (“The Bridge”) used harsh color and jagged forms."},
+{era:"Expressionism · early 20th c.", q:"Egon Schiele, known for raw, angular, twisted figures, worked in which mode?", options:["Expressionism","Rococo","Neoclassicism","Minimalism"], answer:"Expressionism", note:"<b>Schiele</b>’s intense figure studies epitomize Austrian Expressionism."},
+
+/* ---------------- CUBISM ---------------- */
+{era:"Cubism · c. 1908", q:"Cubism broke subjects into?", options:["Fragmented geometric planes","Soft pastel washes","Photo-realistic detail","Flowing curves"], answer:"Fragmented geometric planes", note:"Objects shown from several viewpoints at once and reassembled."},
+{era:"Cubism · early 20th c.", q:"Cubism was co-founded by Pablo Picasso and?", options:["Georges Braque","Henri Matisse","Juan Gris","Fernand Léger"], answer:"Georges Braque", note:"<b>Picasso and Braque</b> developed Cubism together, c. 1908–1914."},
+{era:"Proto-Cubism · 1907", q:"“Les Demoiselles d’Avignon,” a jagged proto-Cubist breakthrough, is by?", options:["Pablo Picasso","Georges Braque","Paul Cézanne","Marcel Duchamp"], answer:"Pablo Picasso", note:"<b>Picasso</b>, 1907 — a violent rupture with traditional perspective."},
+{era:"Cubism", q:"The two main phases of Cubism are Analytic and?", options:["Synthetic","Organic","Kinetic","Optical"], answer:"Synthetic", note:"<b>Synthetic Cubism</b> introduced collage and brighter, flatter shapes."},
+
+/* ---------------- FUTURISM ---------------- */
+{era:"Futurism · 1909", q:"Futurism glorified?", options:["Speed, technology and the machine","Rural nostalgia","Religious devotion","Classical calm"], answer:"Speed, technology and the machine", note:"An Italian celebration of modern dynamism, motion and industry."},
+{era:"Futurism", q:"Futurism began in which country?", options:["Italy","Russia","France","USA"], answer:"Italy", note:"An Italian movement, launched in 1909."},
+{era:"Futurism · 1909", q:"The Futurist Manifesto was written by?", options:["Filippo Tommaso Marinetti","Umberto Boccioni","Giacomo Balla","Gino Severini"], answer:"Filippo Tommaso Marinetti", note:"Poet <b>Marinetti</b> launched Futurism with a fiery published manifesto."},
+{era:"Futurism · 1913", q:"“Unique Forms of Continuity in Space,” a striding bronze figure, is by?", options:["Umberto Boccioni","Auguste Rodin","Constantin Brâncuși","Alberto Giacometti"], answer:"Umberto Boccioni", note:"<b>Boccioni</b> captured a body dissolving into pure motion."},
+
+/* ---------------- DADA ---------------- */
+{era:"Dada · 1916", q:"Dada arose as a reaction to the horrors of?", options:["World War I","The French Revolution","The Cold War","The Black Death"], answer:"World War I", note:"An absurdist protest against the “reason” that led to industrial war."},
+{era:"Dada · 1917", q:"Duchamp’s “Fountain,” a signed porcelain urinal, is an example of a?", options:["Readymade","Fresco","Collage","Mobile"], answer:"Readymade", note:"A <b>readymade</b> — an ordinary object declared to be art."},
+{era:"Dada · 1916", q:"Dada was born at the Cabaret Voltaire in which city?", options:["Zurich","Paris","New York","Berlin"], answer:"Zurich", note:"Founded in neutral <b>Zurich</b> during WWI."},
+{era:"Dada · Berlin", q:"Which artist created biting photomontages and is linked to Berlin Dada?", options:["Hannah Höch","Gustav Klimt","Claude Monet","Jacques-Louis David"], answer:"Hannah Höch", note:"<b>Höch</b> cut and reassembled mass-media images into sharp satire."},
+
+/* ---------------- SURREALISM ---------------- */
+{era:"Surrealism · 1920s", q:"Surrealism explored?", options:["Dreams and the unconscious mind","Industrial machinery","Ancient mythology only","Pure geometry"], answer:"Dreams and the unconscious mind", note:"Founded in 1924, it mined the irrational logic of dreams."},
+{era:"Surrealism · 1931", q:"“The Persistence of Memory,” with its melting clocks, is by?", options:["Salvador Dalí","René Magritte","Max Ernst","Joan Miró"], answer:"Salvador Dalí", note:"<b>Dalí</b>’s hyper-real dreamscapes are Surrealism’s most iconic images."},
+{era:"Surrealism", q:"Surrealism was strongly influenced by the psychoanalytic theories of?", options:["Sigmund Freud","Ivan Pavlov","B.F. Skinner","Wilhelm Wundt"], answer:"Sigmund Freud", note:"<b>Freud</b>’s ideas about dreams and the unconscious were central."},
+{era:"Surrealism · 1929", q:"René Magritte’s painting of a pipe famously states which phrase?", options:["“This is not a pipe.”","“I think, therefore I am.”","“Less is more.”","“Art is dead.”"], answer:"“This is not a pipe.”", note:"<b>Magritte</b> — a painting of a pipe is an image, not the object itself."},
+{era:"Surrealism", q:"The technique of spontaneous, unplanned mark-making used by Surrealists is?", options:["Automatism","Pointillism","Sfumato","Grisaille"], answer:"Automatism", note:"<b>Automatism</b> lets the hand move freely to reveal the unconscious."},
+
+/* ---------------- ABSTRACT EXPRESSIONISM ---------------- */
+{era:"Abstract Expressionism · 1940s–50s", q:"Abstract Expressionism first flourished in which city after WWII?", options:["New York","Paris","London","Berlin"], answer:"New York", note:"It made <b>New York</b> the new center of the Western art world."},
+{era:"Abstract Expressionism", q:"Jackson Pollock is famous for his?", options:["Drip / action paintings","Soft society portraits","Comic-book panels","Marble sculptures"], answer:"Drip / action paintings", note:"<b>Pollock</b> poured and flung paint onto canvas laid on the floor."},
+{era:"Abstract Expressionism", q:"Mark Rothko is known for large, glowing?", options:["Fields of color","Comic strips","Geometric grids","Portrait busts"], answer:"Fields of color", note:"<b>Rothko</b>’s soft-edged rectangles aim for a meditative, spiritual effect."},
+{era:"Abstract Expressionism", q:"The energetic, gestural style of Pollock and de Kooning is called?", options:["Action painting","Op Art","Pointillism","Tonalism"], answer:"Action painting", note:"<b>Action painting</b> treats the canvas as an arena for physical gesture."},
+
+/* ---------------- POP ART ---------------- */
+{era:"Pop Art · 1950s–60s", q:"Pop Art drew its imagery from?", options:["Advertising and mass consumer culture","Ancient myth","Religious icons","Rural landscapes"], answer:"Advertising and mass consumer culture", note:"Comics, ads, packaging and celebrity — the imagery of everyday life."},
+{era:"Pop Art · 1960s", q:"Andy Warhol famously silkscreened?", options:["Campbell’s Soup Cans and Marilyn Monroe","Water lilies","Melting clocks","Sunflowers"], answer:"Campbell’s Soup Cans and Marilyn Monroe", note:"<b>Warhol</b> turned mass-produced imagery into gallery art."},
+{era:"Pop Art · 1960s", q:"Roy Lichtenstein imitated the printed look of?", options:["Comic strips, with Ben-Day dots","Stained glass","Renaissance fresco","Charcoal sketches"], answer:"Comic strips, with Ben-Day dots", note:"<b>Lichtenstein</b> blew up comic panels, dots and all."},
+{era:"Pop Art", q:"Pop Art rose to prominence in which decade?", options:["1960s","1890s","1920s","1790s"], answer:"1960s", note:"It peaked in 1960s Britain and America."},
+
+/* ---------------- MINIMALISM / CONCEPTUAL / CONTEMPORARY ---------------- */
+{era:"Minimalism · 1960s", q:"Minimalism reduced art to?", options:["Simple geometric forms and industrial materials","Ornate decorative detail","Emotional expressive brushwork","Detailed narrative scenes"], answer:"Simple geometric forms and industrial materials", note:"“What you see is what you see” — no hidden meaning, no illusion."},
+{era:"Minimalism · 1960s", q:"Donald Judd and Dan Flavin (fluorescent light works) are associated with?", options:["Minimalism","Baroque","Impressionism","Dada"], answer:"Minimalism", note:"<b>Minimalists</b> favored repetition, industrial fabrication and pure form."},
+{era:"Conceptual Art · 1960s–70s", q:"Conceptual Art holds that the most important part of an artwork is?", options:["The idea behind it","Its market price","Its ornate frame","The skill of the brushwork"], answer:"The idea behind it", note:"The <b>concept</b> matters more than the finished object — sometimes there is no object."},
+{era:"Conceptual Art", q:"Sol LeWitt, known for instruction-based wall drawings, is associated with?", options:["Conceptual Art","Rococo","Fauvism","Futurism"], answer:"Conceptual Art", note:"<b>LeWitt</b>: the idea becomes “a machine that makes the art.”"},
+{era:"Contemporary Art · late 20th c.", q:"Which contemporary artist is known for a shark preserved in formaldehyde?", options:["Damien Hirst","Claude Monet","Jan Vermeer","Caravaggio"], answer:"Damien Hirst", note:"<b>Hirst</b>’s “The Physical Impossibility of Death…” (1991) is a landmark of the YBAs."},
+
+/* ---------------- CHRONOLOGY & TECHNIQUE (general) ---------------- */
+{era:"Chronology", q:"Which movement came first?", options:["Baroque","Rococo","Neoclassicism","Romanticism"], answer:"Baroque", note:"Order: <b>Baroque</b> (1600s) → Rococo → Neoclassicism → Romanticism."},
+{era:"Chronology", q:"Which movement came immediately before Impressionism?", options:["Realism","Cubism","Surrealism","Pop Art"], answer:"Realism", note:"<b>Realism</b> (1850s) directly preceded Impressionism (1870s)."},
+{era:"Technique", q:"“Fresco” is the technique of painting onto?", options:["Wet plaster","Stretched canvas","Wood panel","Copper sheet"], answer:"Wet plaster", note:"Pigment fuses with the wall as the <b>plaster</b> dries."},
+{era:"Technique", q:"Tempera paint traditionally uses which binder?", options:["Egg yolk","Linseed oil","Acrylic polymer","Beeswax"], answer:"Egg yolk", note:"<b>Egg tempera</b> was the main panel medium before oil paint took over."},
+{era:"Technique", q:"The rise of oil painting in the 1400s is especially associated with which region?", options:["The Northern (Flemish) Renaissance","Ancient Rome","Edo Japan","Aztec Mexico"], answer:"The Northern (Flemish) Renaissance", note:"Flemish masters like van Eyck perfected luminous <b>oil</b> glazes."},
+{era:"Vocabulary", q:"An artwork made by gluing paper, fabric or found materials to a surface is a?", options:["Collage","Fresco","Etching","Diptych"], answer:"Collage", note:"<b>Collage</b> was pioneered by the Cubists and embraced by Dada."},
+{era:"Vocabulary", q:"“Avant-garde” refers to art that is?", options:["Experimental and ahead of its time","Copied from old masters","Made only for churches","Purely decorative"], answer:"Experimental and ahead of its time", note:"French for “advance guard” — the innovators pushing art forward."}
+];
+
+/* ---------- render ---------- */
+const quiz = document.getElementById('quiz');
+const scoreNum = document.getElementById('scoreNum');
+const fill = document.getElementById('fill');
+const finish = document.getElementById('finish');
+const LETTERS = ['A','B','C','D','E'];
+let correct = 0, answered = 0;
+const TOTAL = DATA.length;
+
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+DATA.forEach((item,idx)=>{
+  const card = document.createElement('section');
+  card.className = 'card';
+  const num = String(idx+1).padStart(3,'0');
+
+  let imgHTML = '';
+  if(item.img){
+    imgHTML = `<figure class="plate"><img src="${item.img}" alt="${item.cap||'painting'}" loading="lazy"
+      onerror="this.closest('.plate').classList.add('broken')">
+      ${item.cap?`<figcaption>${item.cap}</figcaption>`:''}</figure>`;
+  }
+
+  const opts = shuffle(item.options);
+  const optsHTML = opts.map((o,i)=>{
+    const isCorrect = o===item.answer;
+    return `<button class="opt${isCorrect?' reveal':''}" data-correct="${isCorrect}">
+      <span class="mark">${LETTERS[i]}</span><span>${o}</span></button>`;
+  }).join('');
+
+  card.innerHTML = `
+    <div class="card-head"><span class="cat-no">No. ${num}</span><span class="era">${item.era}</span></div>
+    <p class="q">${item.q}</p>
+    ${imgHTML}
+    <div class="opts">${optsHTML}</div>
+    <div class="note"><b>Answer:</b> ${item.answer}. ${item.note}</div>`;
+
+  const noteEl = card.querySelector('.note');
+  const buttons = card.querySelectorAll('.opt');
+  buttons.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      if(card.classList.contains('answered')) return;
+      card.classList.add('answered');
+      const right = btn.dataset.correct==='true';
+      if(right){ btn.classList.add('correct'); correct++; }
+      else{
+        btn.classList.add('wrong');
+        buttons.forEach(b=>{ if(b.dataset.correct==='true') b.classList.add('correct'); });
+      }
+      buttons.forEach(b=>{ b.disabled=true; if(!b.classList.contains('correct')&&!b.classList.contains('wrong')) b.classList.add('dim'); });
+      noteEl.classList.add('show');
+      answered++;
+      updateScore();
+    });
+  });
+
+  quiz.appendChild(card);
+});
+
+function updateScore(){
+  scoreNum.textContent = correct + ' / ' + TOTAL;
+  fill.style.width = (answered/TOTAL*100) + '%';
+  if(answered===TOTAL) showFinish();
+}
+
+function showFinish(){
+  const pct = Math.round(correct/TOTAL*100);
+  let msg;
+  if(pct>=90) msg="Curator-level. You know your movements cold.";
+  else if(pct>=75) msg="Strong eye — gallery-ready knowledge.";
+  else if(pct>=50) msg="A solid foundation. Review the notes and go again.";
+  else msg="Great start — the notes below each question are your study guide.";
+  document.getElementById('finishScore').textContent = correct + ' / ' + TOTAL + ' correct';
+  document.getElementById('finishMsg').textContent = msg + '  (Scroll up to review any question.)';
+  finish.classList.add('show');
+  finish.scrollIntoView({behavior:'smooth'});
+}
+
+/* study mode */
+const studyBtn = document.getElementById('studyBtn');
+studyBtn.addEventListener('click',()=>{
+  const on = document.body.classList.toggle('study');
+  studyBtn.classList.toggle('active',on);
+  studyBtn.setAttribute('aria-pressed',on);
+  studyBtn.textContent = on ? 'Hide answers' : 'Study mode';
+});
+
+/* reset */
+document.getElementById('resetBtn').addEventListener('click',()=>{ location.reload(); });
+</script>
+</body>
+</html>
